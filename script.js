@@ -151,3 +151,10 @@ if (heroTitle) {
 
   setTimeout(typeEffect, 2500);
 }
+
+// ===== PORTFOLIO CARD CLICK =====
+document.querySelectorAll('.portfolio-card[data-href]').forEach(card => {
+  card.addEventListener('click', () => {
+    window.open(card.dataset.href, '_blank');
+  });
+});

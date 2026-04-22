@@ -177,6 +177,7 @@ section { padding: 100px 0; }
   background:var(--bg-card); border:1px solid var(--glass-border);
   border-radius:var(--radius); overflow:hidden;
   transition: transform 0.4s, box-shadow 0.4s;
+  cursor:pointer;
 }
 .portfolio-card:hover { transform:translateY(-10px); box-shadow:var(--shadow); }
 .portfolio-card .thumb {
