@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>UrbanCart — Modern E-Commerce Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#fafafa;--card:#fff;--text:#111;--muted:#666;--accent:#111;--highlight:#e11d48;--border:#eee}
+body{font-family:'Inter',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+html{scroll-behavior:smooth}
+.container{max-width:1200px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:sticky;top:0;z-index:100;background:#fff;border-bottom:1px solid var(--border);padding:16px 0}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-size:1.4rem;font-weight:800;text-decoration:none;color:var(--text);letter-spacing:-1px}
+nav .logo span{color:var(--highlight)}
+nav .nav-center{display:flex;gap:28px;list-style:none}
+nav .nav-center a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s}
+nav .nav-center a:hover{color:var(--text)}
+nav .nav-right{display:flex;gap:18px;align-items:center}
+nav .nav-right a{color:var(--text);text-decoration:none;font-size:1.1rem;position:relative}
+.cart-count{position:absolute;top:-8px;right:-10px;background:var(--highlight);color:#fff;font-size:.65rem;width:18px;height:18px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700}
+
+/* HERO BANNER */
+.hero-banner{background:#111;color:#fff;padding:80px 0;text-align:center;position:relative;overflow:hidden}
+.hero-banner::before{content:'';position:absolute;top:-50%;right:-20%;width:500px;height:500px;background:radial-gradient(circle,rgba(225,29,72,.15),transparent);pointer-events:none}
+.hero-banner .sale-tag{display:inline-block;background:var(--highlight);color:#fff;padding:6px 20px;border-radius:50px;font-size:.8rem;font-weight:700;margin-bottom:20px;letter-spacing:1px}
+.hero-banner h1{font-size:clamp(2.4rem,5vw,3.8rem);font-weight:800;line-height:1.1;margin-bottom:16px}
+.hero-banner p{color:rgba(255,255,255,.6);font-size:1.1rem;margin-bottom:28px}
+.btn-shop{background:#fff;color:#111;padding:14px 36px;border-radius:8px;text-decoration:none;font-weight:700;transition:transform .3s}
+.btn-shop:hover{transform:translateY(-3px)}
+
+/* CATEGORIES */
+.categories{padding:60px 0}
+.categories h2{font-size:1.6rem;font-weight:800;margin-bottom:28px}
+.cat-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.cat-card{background:#fff;border:1px solid var(--border);border-radius:14px;padding:32px 20px;text-align:center;transition:transform .3s,box-shadow .3s;cursor:pointer}
+.cat-card:hover{transform:translateY(-4px);box-shadow:0 8px 24px rgba(0,0,0,.06)}
+.cat-card .cat-icon{font-size:2.5rem;margin-bottom:12px}
+.cat-card h3{font-size:1rem;font-weight:700}
+.cat-card p{color:var(--muted);font-size:.8rem;margin-top:4px}
+
+/* PRODUCTS */
+.products{padding:60px 0}
+.products-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:28px}
+.products-header h2{font-size:1.6rem;font-weight:800}
+.products-header a{color:var(--highlight);text-decoration:none;font-size:.9rem;font-weight:600}
+.product-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.product-card{background:#fff;border:1px solid var(--border);border-radius:14px;overflow:hidden;transition:transform .3s,box-shadow .3s}
+.product-card:hover{transform:translateY(-6px);box-shadow:0 12px 30px rgba(0,0,0,.08)}
+.product-img{height:220px;display:flex;align-items:center;justify-content:center;font-size:4rem;background:#f5f5f5;position:relative}
+.product-img .badge-sale{position:absolute;top:12px;left:12px;background:var(--highlight);color:#fff;padding:4px 10px;border-radius:6px;font-size:.7rem;font-weight:700}
+.product-img .wishlist{position:absolute;top:12px;right:12px;width:36px;height:36px;border-radius:50%;background:#fff;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;cursor:pointer;transition:all .3s;font-size:.85rem;color:var(--muted)}
+.product-img .wishlist:hover{color:var(--highlight);border-color:var(--highlight)}
+.product-body{padding:18px}
+.product-body .brand{color:var(--muted);font-size:.75rem;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.product-body h3{font-size:1rem;font-weight:600;margin-bottom:8px}
+.product-body .price-row{display:flex;align-items:center;gap:8px}
+.product-body .new-price{font-size:1.1rem;font-weight:800}
+.product-body .old-price{font-size:.85rem;color:var(--muted);text-decoration:line-through}
+.product-body .discount{font-size:.75rem;color:var(--highlight);font-weight:600}
+.product-body .add-btn{display:block;width:100%;margin-top:14px;padding:10px;background:#111;color:#fff;border:none;border-radius:8px;font-family:inherit;font-weight:600;font-size:.9rem;cursor:pointer;transition:background .3s}
+.product-body .add-btn:hover{background:var(--highlight)}
+
+/* FEATURES BAR */
+.features-bar{padding:60px 0;border-top:1px solid var(--border);border-bottom:1px solid var(--border)}
+.features-row{display:grid;grid-template-columns:repeat(4,1fr);gap:24px}
+.feat-item{display:flex;align-items:center;gap:14px}
+.feat-item .feat-icon{width:48px;height:48px;border-radius:12px;background:#f5f5f5;display:flex;align-items:center;justify-content:center;font-size:1.3rem}
+.feat-item h4{font-size:.9rem;font-weight:700}
+.feat-item p{color:var(--muted);font-size:.8rem}
+
+/* NEWSLETTER */
+.newsletter{padding:80px 0;text-align:center}
+.newsletter h2{font-size:1.8rem;font-weight:800;margin-bottom:12px}
+.newsletter p{color:var(--muted);margin-bottom:24px;font-size:1rem}
+.newsletter-form{display:flex;max-width:480px;margin:0 auto;gap:10px}
+.newsletter-form input{flex:1;padding:14px 18px;border:2px solid var(--border);border-radius:10px;font-size:1rem;font-family:inherit}
+.newsletter-form input:focus{outline:none;border-color:#111}
+.newsletter-form button{background:#111;color:#fff;padding:14px 28px;border:none;border-radius:10px;font-weight:700;font-family:inherit;cursor:pointer;transition:background .3s}
+.newsletter-form button:hover{background:var(--highlight)}
+
+footer{padding:48px 0;border-top:1px solid var(--border)}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:40px;margin-bottom:32px}
+.footer-brand .logo{font-size:1.3rem;font-weight:800;display:block;margin-bottom:12px;color:var(--text);text-decoration:none}
+.footer-brand .logo span{color:var(--highlight)}
+.footer-brand p{color:var(--muted);font-size:.85rem;line-height:1.7}
+.footer-col h4{font-size:.9rem;font-weight:700;margin-bottom:14px}
+.footer-col ul{list-style:none}
+.footer-col ul li{margin-bottom:8px}
+.footer-col ul li a{color:var(--muted);text-decoration:none;font-size:.85rem;transition:color .3s}
+.footer-col ul li a:hover{color:var(--text)}
+.footer-bottom{text-align:center;padding-top:24px;border-top:1px solid var(--border);color:var(--muted);font-size:.8rem}
+
+.back-link{position:fixed;bottom:24px;right:24px;background:#111;color:#fff;padding:10px 20px;border-radius:50px;text-decoration:none;font-size:.85rem;font-weight:600;z-index:100;transition:transform .3s}
+.back-link:hover{transform:translateY(-3px)}
+
+@media(max-width:768px){.product-grid,.cat-grid{grid-template-columns:1fr 1fr}.features-row{grid-template-columns:1fr 1fr}.footer-grid{grid-template-columns:1fr 1fr}.team-grid{grid-template-columns:1fr 1fr}nav .nav-center{display:none}}
+</style>
+</head>
+<body>
+<nav><div class="container">
+  <a href="#" class="logo">Urban<span>Cart</span></a>
+  <ul class="nav-center"><li><a href="#">New Arrivals</a></li><li><a href="#">Men</a></li><li><a href="#">Women</a></li><li><a href="#">Accessories</a></li><li><a href="#">Sale</a></li></ul>
+  <div class="nav-right"><a href="#"><i class="fas fa-search"></i></a><a href="#"><i class="fas fa-user"></i></a><a href="#"><i class="fas fa-shopping-bag"></i><span class="cart-count">3</span></a></div>
+</div></nav>
+
+<section class="hero-banner"><div class="container">
+  <div class="sale-tag">🔥 SUMMER SALE — UP TO 60% OFF</div>
+  <h1>Elevate Your<br>Street Style</h1>
+  <p>Discover the latest trends in fashion, footwear, and accessories.</p>
+  <a href="#" class="btn-shop"><i class="fas fa-shopping-bag"></i> Shop Now</a>
+</div></section>
+
+<section class="categories"><div class="container">
+<h2>Shop by Category</h2>
+<div class="cat-grid">
+  <div class="cat-card"><div class="cat-icon">👕</div><h3>T-Shirts</h3><p>120+ items</p></div>
+  <div class="cat-card"><div class="cat-icon">👟</div><h3>Sneakers</h3><p>85+ items</p></div>
+  <div class="cat-card"><div class="cat-icon">🎒</div><h3>Bags</h3><p>64+ items</p></div>
+  <div class="cat-card"><div class="cat-icon">⌚</div><h3>Watches</h3><p>48+ items</p></div>
+</div></div></section>
+
+<section class="products"><div class="container">
+<div class="products-header"><h2>Trending Now 🔥</h2><a href="#">View All →</a></div>
+<div class="product-grid">
+  <div class="product-card"><div class="product-img" style="background:#f0f0f0"><span class="badge-sale">-40%</span><span class="wishlist"><i class="far fa-heart"></i></span>👕</div><div class="product-body"><div class="brand">Nike</div><h3>Air Max Essential Tee</h3><div class="price-row"><span class="new-price">₹899</span><span class="old-price">₹1,499</span><span class="discount">40% OFF</span></div><button class="add-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button></div></div>
+  <div class="product-card"><div class="product-img" style="background:#f5f0ea"><span class="wishlist"><i class="far fa-heart"></i></span>👟</div><div class="product-body"><div class="brand">Adidas</div><h3>Ultraboost Light 23</h3><div class="price-row"><span class="new-price">₹12,999</span></div><button class="add-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button></div></div>
+  <div class="product-card"><div class="product-img" style="background:#eef2f5"><span class="badge-sale">-25%</span><span class="wishlist"><i class="far fa-heart"></i></span>🎒</div><div class="product-body"><div class="brand">HRX</div><h3>Urban Explorer Backpack</h3><div class="price-row"><span class="new-price">₹1,499</span><span class="old-price">₹1,999</span><span class="discount">25% OFF</span></div><button class="add-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button></div></div>
+  <div class="product-card"><div class="product-img" style="background:#f0efe8"><span class="wishlist"><i class="far fa-heart"></i></span>⌚</div><div class="product-body"><div class="brand">Fossil</div><h3>Gen 6 Smartwatch</h3><div class="price-row"><span class="new-price">₹18,995</span></div><button class="add-btn"><i class="fas fa-shopping-cart"></i> Add to Cart</button></div></div>
+</div></div></section>
+
+<section class="features-bar"><div class="container">
+<div class="features-row">
+  <div class="feat-item"><div class="feat-icon">🚚</div><div><h4>Free Shipping</h4><p>Orders above ₹999</p></div></div>
+  <div class="feat-item"><div class="feat-icon">↩️</div><div><h4>Easy Returns</h4><p>30-day return policy</p></div></div>
+  <div class="feat-item"><div class="feat-icon">🔒</div><div><h4>Secure Payment</h4><p>SSL encrypted checkout</p></div></div>
+  <div class="feat-item"><div class="feat-icon">💬</div><div><h4>24/7 Support</h4><p>Chat with our team</p></div></div>
+</div></div></section>
+
+<section class="newsletter"><div class="container">
+<h2>Stay in the Loop</h2>
+<p>Subscribe to get exclusive offers, early access to sales, and style tips.</p>
+<div class="newsletter-form"><input type="email" placeholder="Enter your email"><button>Subscribe</button></div>
+</div></section>
+
+<footer><div class="container">
+<div class="footer-grid">
+  <div class="footer-brand"><a href="#" class="logo">Urban<span>Cart</span></a><p>Your one-stop destination for trendy fashion and accessories. Quality products at affordable prices.</p></div>
+  <div class="footer-col"><h4>Shop</h4><ul><li><a href="#">New Arrivals</a></li><li><a href="#">Best Sellers</a></li><li><a href="#">Sale</a></li><li><a href="#">Collections</a></li></ul></div>
+  <div class="footer-col"><h4>Help</h4><ul><li><a href="#">FAQ</a></li><li><a href="#">Shipping</a></li><li><a href="#">Returns</a></li><li><a href="#">Track Order</a></li></ul></div>
+  <div class="footer-col"><h4>Company</h4><ul><li><a href="#">About Us</a></li><li><a href="#">Careers</a></li><li><a href="#">Privacy Policy</a></li><li><a href="#">Terms</a></li></ul></div>
+</div>
+<div class="footer-bottom"><p>© 2026 UrbanCart. All rights reserved. | Sample project by DevCraft Studio</p></div>
+</div></footer>
+
+<a href="../index.html" class="back-link">← Back to DevCraft</a>
+
+<script>
+// Add to cart interaction
+document.querySelectorAll('.add-btn').forEach(btn=>{
+  btn.addEventListener('click',function(){
+    this.innerHTML='<i class="fas fa-check"></i> Added!';
+    this.style.background='#16a34a';
+    setTimeout(()=>{this.innerHTML='<i class="fas fa-shopping-cart"></i> Add to Cart';this.style.background='';},2000);
+  });
+});
+// Wishlist toggle
+document.querySelectorAll('.wishlist').forEach(w=>{
+  w.addEventListener('click',function(){
+    const icon=this.querySelector('i');
+    icon.classList.toggle('far');icon.classList.toggle('fas');
+    this.style.color=icon.classList.contains('fas')?'var(--highlight)':'';
+  });
+});
+</script>
+</body>
+</html>

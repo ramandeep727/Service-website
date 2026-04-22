@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arjun Mehta — Developer Portfolio</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+:root{--bg:#0b0d17;--card:rgba(255,255,255,0.04);--border:rgba(255,255,255,0.08);--text:#e8e8f0;--muted:#7a7a9a;--accent:#8b5cf6;--accent2:#22d3ee;}
+body{font-family:'Space Grotesk',sans-serif;background:var(--bg);color:var(--text);overflow-x:hidden}
+html{scroll-behavior:smooth}
+.container{max-width:1100px;margin:0 auto;padding:0 24px}
+
+/* NAV */
+nav{position:fixed;top:0;width:100%;z-index:100;padding:18px 0;background:rgba(11,13,23,0.8);backdrop-filter:blur(20px);border-bottom:1px solid var(--border)}
+nav .container{display:flex;justify-content:space-between;align-items:center}
+nav .logo{font-size:1.3rem;font-weight:700;color:var(--accent);text-decoration:none}
+nav ul{list-style:none;display:flex;gap:28px}
+nav ul a{color:var(--muted);text-decoration:none;font-size:.9rem;font-weight:500;transition:color .3s}
+nav ul a:hover{color:var(--text)}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;align-items:center;padding-top:80px;position:relative}
+.hero-content{display:grid;grid-template-columns:1fr 1fr;gap:60px;align-items:center}
+.hero-text .tag{display:inline-block;padding:6px 16px;background:rgba(139,92,246,0.15);color:var(--accent);border-radius:50px;font-size:.8rem;font-weight:500;margin-bottom:20px}
+.hero-text h1{font-size:3.2rem;font-weight:700;line-height:1.15;margin-bottom:16px}
+.hero-text h1 span{background:linear-gradient(135deg,var(--accent),var(--accent2));-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-text p{color:var(--muted);font-size:1.1rem;line-height:1.7;margin-bottom:28px}
+.hero-btns{display:flex;gap:14px}
+.btn-p{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#fff;padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:600;font-size:.95rem;transition:transform .3s,box-shadow .3s}
+.btn-p:hover{transform:translateY(-3px);box-shadow:0 12px 30px rgba(139,92,246,.4)}
+.btn-s{border:1px solid var(--border);color:var(--text);padding:12px 28px;border-radius:50px;text-decoration:none;font-weight:500;font-size:.95rem;transition:background .3s}
+.btn-s:hover{background:rgba(255,255,255,.05)}
+.hero-visual{position:relative;display:flex;justify-content:center}
+.avatar-ring{width:320px;height:320px;border-radius:50%;background:linear-gradient(135deg,var(--accent),var(--accent2));padding:4px;animation:spin 8s linear infinite}
+.avatar-ring .inner{width:100%;height:100%;border-radius:50%;background:var(--bg);display:flex;align-items:center;justify-content:center;font-size:6rem}
+@keyframes spin{0%{box-shadow:0 0 30px rgba(139,92,246,.3)}50%{box-shadow:0 0 60px rgba(34,211,238,.3)}100%{box-shadow:0 0 30px rgba(139,92,246,.3)}}
+
+/* ABOUT */
+.about{padding:100px 0}
+.section-label{color:var(--accent);font-size:.8rem;text-transform:uppercase;letter-spacing:3px;font-weight:600;margin-bottom:10px}
+.section-title{font-size:2.4rem;font-weight:700;margin-bottom:16px}
+.about-grid{display:grid;grid-template-columns:1fr 1fr;gap:48px;margin-top:40px}
+.about-text p{color:var(--muted);line-height:1.8;margin-bottom:16px}
+.tech-stack{display:flex;flex-wrap:wrap;gap:10px;margin-top:20px}
+.tech-stack span{padding:6px 16px;background:var(--card);border:1px solid var(--border);border-radius:8px;font-size:.85rem;color:var(--accent2);font-family:'JetBrains Mono',monospace}
+
+/* SKILLS */
+.skills{padding:80px 0;background:rgba(255,255,255,.01)}
+.skills-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px;margin-top:40px}
+.skill-item{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:24px}
+.skill-item .skill-head{display:flex;justify-content:space-between;margin-bottom:12px}
+.skill-item .skill-head h4{font-size:1rem;font-weight:600}
+.skill-item .skill-head span{color:var(--accent);font-size:.9rem;font-family:'JetBrains Mono',monospace}
+.skill-bar{height:6px;background:rgba(255,255,255,.06);border-radius:10px;overflow:hidden}
+.skill-bar .fill{height:100%;border-radius:10px;background:linear-gradient(90deg,var(--accent),var(--accent2));transition:width 1.5s ease}
+
+/* PROJECTS */
+.projects{padding:100px 0}
+.projects-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:24px;margin-top:40px}
+.project-card{background:var(--card);border:1px solid var(--border);border-radius:16px;overflow:hidden;transition:transform .4s,box-shadow .4s}
+.project-card:hover{transform:translateY(-8px);box-shadow:0 20px 40px rgba(139,92,246,.12)}
+.project-card .project-img{height:180px;background:linear-gradient(135deg,rgba(139,92,246,.2),rgba(34,211,238,.2));display:flex;align-items:center;justify-content:center;font-size:3rem}
+.project-card .project-info{padding:24px}
+.project-card .project-info h3{font-size:1.15rem;font-weight:700;margin-bottom:8px}
+.project-card .project-info p{color:var(--muted);font-size:.9rem;line-height:1.6;margin-bottom:16px}
+.project-tags{display:flex;gap:8px;flex-wrap:wrap}
+.project-tags span{font-size:.75rem;padding:4px 10px;background:rgba(139,92,246,.12);color:var(--accent);border-radius:50px}
+
+/* CONTACT */
+.contact{padding:100px 0}
+.contact-box{background:linear-gradient(135deg,var(--accent),#6d28d9);border-radius:20px;padding:60px;text-align:center}
+.contact-box h2{font-size:2.2rem;font-weight:700;margin-bottom:12px}
+.contact-box p{opacity:.85;font-size:1.05rem;margin-bottom:28px}
+.contact-box a{background:#fff;color:var(--accent);padding:14px 36px;border-radius:50px;text-decoration:none;font-weight:700;transition:transform .3s}
+.contact-box a:hover{transform:translateY(-3px)}
+
+/* FOOTER */
+footer{padding:40px 0;text-align:center;border-top:1px solid var(--border)}
+footer p{color:var(--muted);font-size:.85rem}
+footer .socials{display:flex;justify-content:center;gap:16px;margin-top:16px}
+footer .socials a{width:40px;height:40px;border-radius:50%;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--muted);text-decoration:none;transition:all .3s}
+footer .socials a:hover{background:var(--accent);border-color:var(--accent);color:#fff}
+
+.back-link{position:fixed;bottom:24px;right:24px;background:var(--accent);color:#fff;padding:10px 20px;border-radius:50px;text-decoration:none;font-size:.85rem;font-weight:600;z-index:100;transition:transform .3s}
+.back-link:hover{transform:translateY(-3px)}
+
+@media(max-width:768px){
+.hero-content{grid-template-columns:1fr;text-align:center}
+.hero-visual{order:-1}
+.avatar-ring{width:220px;height:220px}
+.about-grid{grid-template-columns:1fr}
+.hero-btns{justify-content:center}
+nav ul{display:none}
+}
+</style>
+</head>
+<body>
+<nav><div class="container"><a href="#" class="logo">AM.</a><ul><li><a href="#about">About</a></li><li><a href="#skills">Skills</a></li><li><a href="#projects">Projects</a></li><li><a href="#contact">Contact</a></li></ul></div></nav>
+
+<section class="hero"><div class="container"><div class="hero-content">
+<div class="hero-text">
+  <span class="tag">👋 Hello, I'm</span>
+  <h1>Arjun <span>Mehta</span></h1>
+  <p>A passionate full-stack developer & B.Tech CSE student crafting modern web experiences with clean code and creative design.</p>
+  <div class="hero-btns"><a href="#projects" class="btn-p"><i class="fas fa-code"></i> View Projects</a><a href="#contact" class="btn-s"><i class="fas fa-paper-plane"></i> Hire Me</a></div>
+</div>
+<div class="hero-visual"><div class="avatar-ring"><div class="inner">👨‍💻</div></div></div>
+</div></div></section>
+
+<section class="about" id="about"><div class="container">
+<div class="section-label">About Me</div>
+<h2 class="section-title">Building the web, one pixel at a time.</h2>
+<div class="about-grid">
+<div class="about-text">
+  <p>I'm a 3rd year Computer Science student who loves building beautiful, functional websites. I specialize in React, Node.js, and modern web technologies.</p>
+  <p>When I'm not coding, you'll find me contributing to open-source projects, writing technical blogs, or exploring new frameworks.</p>
+</div>
+<div>
+  <h4 style="margin-bottom:14px;font-size:1rem">Tech Stack</h4>
+  <div class="tech-stack">
+    <span>React.js</span><span>Node.js</span><span>MongoDB</span><span>Express</span><span>JavaScript</span><span>TypeScript</span><span>Python</span><span>Git</span><span>Figma</span><span>Firebase</span>
+  </div>
+</div>
+</div></div></section>
+
+<section class="skills" id="skills"><div class="container">
+<div class="section-label">Skills</div>
+<h2 class="section-title">What I'm good at</h2>
+<div class="skills-grid">
+  <div class="skill-item"><div class="skill-head"><h4>React.js</h4><span>92%</span></div><div class="skill-bar"><div class="fill" style="width:92%"></div></div></div>
+  <div class="skill-item"><div class="skill-head"><h4>Node.js / Express</h4><span>88%</span></div><div class="skill-bar"><div class="fill" style="width:88%"></div></div></div>
+  <div class="skill-item"><div class="skill-head"><h4>MongoDB</h4><span>85%</span></div><div class="skill-bar"><div class="fill" style="width:85%"></div></div></div>
+  <div class="skill-item"><div class="skill-head"><h4>JavaScript / TS</h4><span>94%</span></div><div class="skill-bar"><div class="fill" style="width:94%"></div></div></div>
+  <div class="skill-item"><div class="skill-head"><h4>HTML & CSS</h4><span>96%</span></div><div class="skill-bar"><div class="fill" style="width:96%"></div></div></div>
+  <div class="skill-item"><div class="skill-head"><h4>Python</h4><span>78%</span></div><div class="skill-bar"><div class="fill" style="width:78%"></div></div></div>
+</div></div></section>
+
+<section class="projects" id="projects"><div class="container">
+<div class="section-label">Projects</div>
+<h2 class="section-title">Featured Work</h2>
+<div class="projects-grid">
+  <div class="project-card"><div class="project-img">🛒</div><div class="project-info"><h3>ShopEase — E-Commerce Platform</h3><p>A full-stack MERN e-commerce application with cart, payments, and admin dashboard.</p><div class="project-tags"><span>React</span><span>Node.js</span><span>MongoDB</span><span>Stripe</span></div></div></div>
+  <div class="project-card"><div class="project-img">💬</div><div class="project-info"><h3>ChatVibe — Real-time Messenger</h3><p>A real-time chat application with Socket.io, user authentication, and message history.</p><div class="project-tags"><span>Socket.io</span><span>Express</span><span>React</span></div></div></div>
+  <div class="project-card"><div class="project-img">📊</div><div class="project-info"><h3>TaskFlow — Project Manager</h3><p>A Kanban-style project management tool with drag-and-drop, teams, and analytics.</p><div class="project-tags"><span>Next.js</span><span>Prisma</span><span>PostgreSQL</span></div></div></div>
+</div></div></section>
+
+<section class="contact" id="contact"><div class="container">
+<div class="contact-box">
+  <h2>Let's Work Together</h2>
+  <p>Have a project in mind? I'd love to hear about it.</p>
+  <a href="mailto:arjun@example.com"><i class="fas fa-envelope"></i> Get In Touch</a>
+</div></div></section>
+
+<footer><div class="container"><p>© 2026 Arjun Mehta. All rights reserved.</p><div class="socials"><a href="#"><i class="fab fa-github"></i></a><a href="#"><i class="fab fa-linkedin-in"></i></a><a href="#"><i class="fab fa-twitter"></i></a><a href="#"><i class="fab fa-instagram"></i></a></div></div></footer>
+
+<a href="../index.html" class="back-link">← Back to DevCraft</a>
+</body>
+</html>
